@@ -17,7 +17,7 @@ var commentRouter = require('./routes/commentRouter');
 const mongoose = require('mongoose');
 
 const url = config.mongoUrl;
-const connect = mongoose.connect(url);
+const connect = mongoose.connect(process.env.MONGODB_URI || url);
 
 connect.then((db) => {
   console.log('Correctly connected to the server');
