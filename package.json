@@ -5,7 +5,9 @@
   "scripts": {
     "client": "cd client && yarn start",
     "server": "node ./bin/www",
-    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
+    "start": "node ./bin/www",
+    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",
