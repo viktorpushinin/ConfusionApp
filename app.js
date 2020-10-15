@@ -1,12 +1,8 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
-var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var session = require('express-session');
-var FileStore = require('session-file-store')(session);
 var passport = require('passport');
-var authenticate = require('./authenticate');
 var config = require('./config');
 
 var indexRouter = require('./routes/index');
@@ -19,8 +15,6 @@ var favoriteRouter = require('./routes/favoriteRouter');
 var commentRouter = require('./routes/commentRouter');
 
 const mongoose = require('mongoose');
-
-const Dishes = require('./models/dishes');
 
 const url = config.mongoUrl;
 const connect = mongoose.connect(url);
