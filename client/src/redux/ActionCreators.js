@@ -336,7 +336,7 @@ export const postFavorite = (dishId) => (dispatch) => {
             throw error;
       })
     .then(response => response.json())
-    .then(favorites => { console.log('Favorite Added', favorites); dispatch(addFavorites(favorites)); })
+    .then(favorites => { dispatch(addFavorites(favorites)); })
     .catch(error => dispatch(favoritesFailed(error.message)));
 }
 
@@ -364,7 +364,7 @@ export const deleteFavorite = (dishId) => (dispatch) => {
             throw error;
       })
     .then(response => response.json())
-    .then(favorites => { console.log('Favorite Deleted', favorites); dispatch(addFavorites(favorites)); })
+    .then(favorites => { dispatch(addFavorites(favorites)); })
     .catch(error => dispatch(favoritesFailed(error.message)));
 };
 

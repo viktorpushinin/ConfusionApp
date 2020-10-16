@@ -72,27 +72,22 @@ class CommentForm extends Component {
 function RenderDish({dish, favorite, postFavorite}) {
 	return(
 		<div className="col-12 col-md-5 m-1">
-			<FadeTransform in 
-				transformProps={{
-					exitTransform: 'scale(0.5) translateY(-50%)'
-				}}>
-				<Card>
-					<CardImg top src={baseUrl + dish.image} alt={baseUrl + dish.image} />
-					<CardImgOverlay>
-						<Button outline color="primary" onClick={() => favorite ? console.log('Already favorite') : postFavorite(dish._id)}>
-							{favorite ?
-								<span className="fa fa-heart"></span>
-								: 
-								<span className="fa fa-heart-o"></span>
-							}
-						</Button>
-					</CardImgOverlay>
-					<CardBody>
-						<CardTitle>{dish.name}</CardTitle>
-						<CardText>{dish.description}</CardText>
-					</CardBody>
-				</Card>
-			</FadeTransform>
+			<Card>
+				<CardImg top src={baseUrl + dish.image} alt={baseUrl + dish.image} />
+				<CardImgOverlay>
+					<Button outline color="primary" onClick={() => postFavorite(dish._id)}>
+						{favorite ?
+							<span className="fa fa-heart"></span>
+							: 
+							<span className="fa fa-heart-o"></span>
+						}
+					</Button>
+				</CardImgOverlay>
+				<CardBody>
+					<CardTitle>{dish.name}</CardTitle>
+					<CardText>{dish.description}</CardText>
+				</CardBody>
+			</Card>
 		</div>
 	);
 }
@@ -103,19 +98,15 @@ function RenderComments({comments, postComment, dishId}) {
 			<div className="col-12 col-md-5 m-1">
 				<h4>Comments</h4>
 				<ul className="list-unstyled">
-					<Stagger in>
-						{comments.map((comment) => {
-							return (
-								<Fade in key={comment._id}>
-									<li>
-									<p>{comment.comment}</p>
-									<p>{comment.rating} stars</p>
-									<p>-- {comment.author.firstname} {comment.author.lastname} , {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day:'2-digit'}).format(new Date(Date.parse(comment.updatedAt)))}</p>
-									</li>
-								</Fade>
-							);
-						})}
-					</Stagger>
+					{comments.map((comment) => {
+						return (
+							<li>
+								<p>{comment.comment}</p>
+								<p>{comment.rating} stars</p>
+								<p>-- {comment.author.firstname} {comment.author.lastname} , {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day:'2-digit'}).format(new Date(Date.parse(comment.updatedAt)))}</p>
+							</li>
+						);
+					})}
 				</ul>
 				<CommentForm dishId={dishId} postComment={postComment} />
 			</div>

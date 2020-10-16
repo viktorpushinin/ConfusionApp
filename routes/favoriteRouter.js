@@ -23,7 +23,7 @@ favoriteRouter.route('/')
     .catch((err) => next(err));
 })
 .post(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
-    AddFavorite(req, res, next);
+    AddRemoveFavorite(req, res, next);
 })
 .put(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
     res.statusCode = 403;
@@ -64,7 +64,7 @@ favoriteRouter.route('/:dishId')
 })
 .post(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
     req.body = [{_id: req.params.dishId}];
-    AddFavorite(req, res, next);
+    AddRemoveFavorite(req, res, next);
 })
 .put(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
     res.statusCode = 403;
@@ -99,7 +99,7 @@ favoriteRouter.route('/:dishId')
     .catch((err) => next(err));
 });
 
-function AddFavorite(req, res, next) {
+function AddRemoveFavorite(req, res, next) {
     Favorites.find({})
     .then((allFavs) => {
         let userFavorites = null;
@@ -125,13 +125,20 @@ function AddFavorite(req, res, next) {
             }, (err) => next(err))
             .catch((err) => next(err));
         } else {
-            for (var newDishIdx = (req.body.length - 1); newDishIdx >= 0; newDishIdx--) {
-                if (userFavorites.dishes.some( item => item.equals(req.body[newDishIdx]._id) ) ) {
-                    console.log('Dish ' + req.body[newDishIdx]._id + ' is already in the favorites');
-                    continue;
+            for (var newDishIdx = 0; newDishIdx < req.body.length; newDishIdx++) {
+                let removed = false;
+                for (var favDishIdx = 0; favDishIdx < userFavorites.dishes.length; favDishIdx++) {
+                    if (userFavorites.dishes[favDishIdx].equals(req.body[newDishIdx]._id)) {
+                        // got the existing favorite hence remove it (toggle logic)
+                        userFavorites.dishes.splice(favDishIdx, 1);
+                        removed = true;
+                        break;
+                    }
                 }
 
-                userFavorites.dishes.push(req.body[newDishIdx]._id);
+                if (!removed) {
+                    userFavorites.dishes.push(req.body[newDishIdx]._id);
+                }
             }
 
             userFavorites.save()
