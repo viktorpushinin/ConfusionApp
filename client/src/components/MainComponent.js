@@ -9,7 +9,7 @@ import DishDetail from './DishdetailComponent';
 import Favorites from './FavoriteComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { postComment, postFeedback, fetchDishes, fetchComments, fetchPromos, fetchLeaders, loginUser, logoutUser, fetchFavorites, postFavorite, deleteFavorite } from '../redux/ActionCreators';
+import { postComment, postFeedback, fetchDishes, fetchComments, fetchPromos, fetchLeaders, loginUser, signupUser, logoutUser, fetchFavorites, postFavorite, deleteFavorite } from '../redux/ActionCreators';
 import { actions } from 'react-redux-form';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
@@ -33,6 +33,7 @@ const mapDispatchToProps = (dispatch) => ({
     fetchPromos: () => {dispatch(fetchPromos())},
     fetchLeaders: () => {dispatch(fetchLeaders())},
     loginUser: (creds) => dispatch(loginUser(creds)),
+    signupUser: (creds) => dispatch(signupUser(creds)),
     logoutUser: () => dispatch(logoutUser()),
     fetchFavorites: () => dispatch(fetchFavorites()),
     postFavorite: (dishId) => dispatch(postFavorite(dishId)),
@@ -105,9 +106,10 @@ class Main extends Component {
 
         return (
             <div>
-                <Header auth={this.props.auth} 
-                    loginUser={this.props.loginUser} 
-                    logoutUser={this.props.logoutUser} 
+                <Header auth={this.props.auth}
+                    loginUser={this.props.loginUser}
+                    signupUser={this.props.signupUser}
+                    logoutUser={this.props.logoutUser}
                     />   
                 <TransitionGroup>
                     <CSSTransition key={this.props.location.key} classNames="page" timeout={300}>
