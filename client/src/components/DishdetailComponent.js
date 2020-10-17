@@ -92,14 +92,14 @@ function RenderDish({dish, favorite, postFavorite}) {
 }
 
 function RenderComments({comments, postComment, dishId}) {
-	if (comments != null)
+	if (comments != null) {
 		return(
 			<div className="col-12 col-md-5 m-1">
 				<h4>Comments</h4>
 				<ul className="list-unstyled">
 					{comments.map((comment) => {
 						return (
-							<li>
+							<li key={comment._id}>
 								<p>{comment.comment}</p>
 								<p>{comment.rating} stars</p>
 								<p>-- {comment.author.firstname} {comment.author.lastname} , {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day:'2-digit'}).format(new Date(Date.parse(comment.updatedAt)))}</p>
@@ -110,10 +110,11 @@ function RenderComments({comments, postComment, dishId}) {
 				<CommentForm dishId={dishId} postComment={postComment} />
 			</div>
 		);
-	else
+	} else {
 		return(
 			<div></div>
 		);
+	}
 }
 
 const DishDetail = (props) => {
