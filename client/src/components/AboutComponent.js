@@ -49,16 +49,6 @@ function RenderLeaders ({leaders}) {
 function About(props) {
     return(
         <div className="container">
-            <div className="row">
-                <Breadcrumb>
-                    <BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
-                    <BreadcrumbItem active>About Us</BreadcrumbItem>
-                </Breadcrumb>
-                <div className="col-12">
-                    <h3>About Us</h3>
-                    <hr />
-                </div>                
-            </div>
             <div className="row row-content">
                 <div className="col-12 col-md-6">
                     <h2>Our History</h2>

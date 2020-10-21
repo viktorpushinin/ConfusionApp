@@ -56,16 +56,6 @@ const Favorites = (props) => {
         return(
             <div className="container">
                 <div className="row">
-                    <Breadcrumb>
-                        <BreadcrumbItem><Link to='/home'>Home</Link></BreadcrumbItem>
-                        <BreadcrumbItem active>Favorites</BreadcrumbItem>
-                    </Breadcrumb>
-                    <div className="col-12">
-                        <h3>Favorites</h3>
-                        <hr />
-                    </div>
-                </div>
-                <div className="row">
                     <Media list>
                         <Stagger in>
                             {favorites}
