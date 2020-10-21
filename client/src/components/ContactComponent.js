@@ -31,7 +31,10 @@ class Contact extends Component {
 
         console.log(JSON.stringify(feedback));
 
-        this.props.postFeedback(feedback);
+        // not implemented on server side
+        //this.props.postFeedback(feedback);
+        alert("Thank you for the feedback!");
+
         this.props.resetFeedbackForm();
     }
 
