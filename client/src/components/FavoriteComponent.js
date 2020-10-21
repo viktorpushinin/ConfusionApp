@@ -8,16 +8,18 @@ import { Fade, Stagger } from 'react-animation-components';
 function RenderMenuItem({ dish, deleteFavorite }) {
     return(
         <Media tag="li">
-            <Media left middle>
-                <Media object src={baseUrl + dish.image} alt={dish.name} />
-            </Media>
+            <Link to={`/menu/${dish._id}`} >
+                <Media left middle>
+                    <Media object src={baseUrl + dish.image} alt={dish.name} />
+                </Media>
+            </Link>
             <Media body className="ml-5">
-                <Media heading>{dish.name}</Media>
-                <p>{dish.description}</p>
-                <Button outline color="danger" onClick={() => deleteFavorite(dish._id)}>
-                    <span className="fa fa-times"></span>
-                </Button>
-            </Media>
+                    <Media heading>{dish.name}</Media>
+                    <p>{dish.description}</p>
+                    <Button outline color="danger" onClick={() => deleteFavorite(dish._id)}>
+                        <span className="fa fa-times"></span>
+                    </Button>
+                </Media>
         </Media>
     );
 }
