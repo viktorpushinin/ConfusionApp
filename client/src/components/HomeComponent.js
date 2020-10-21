@@ -33,13 +33,12 @@ function Home(props) {
     if (props.dishesLoading || props.promosLoading || props.leadersLoading) {
         return (
             <div className="container">
-            <h4>Home</h4>
-            <div className="row align-items-start">
-                <div className="col-12 col-md m-1">
-                    <Loading />
+                <div className="row align-items-start">
+                    <div className="col-12 col-md m-1">
+                        <Loading />
+                    </div>
                 </div>
-            </div>
-        </div>    
+            </div>    
         );
     }
 
